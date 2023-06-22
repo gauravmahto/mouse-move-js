@@ -1,0 +1,21 @@
+{
+  "name": "core-mouse-move",
+  "version": "1.0.0",
+  "description": "Mouse move",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gaurav",
+  "license": "MIT",
+  "type": "module",
+  "compilerOptions": {
+    "module": "nodenext"
+  },
+  "dependencies": {
+    "robotjs": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.9"
+  }
+}
