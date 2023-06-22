@@ -67,10 +67,11 @@ async function* timerPromise(timeMs) {
 
 }
 
-for await (const interval of timerPromise(5000)) {
+for await (const interval of timerPromise(10000)) {
 
   console.log(`Waited ${interval}`);
 
-  robot.moveMouse(getRandomNumber(0, screenSize.height), getRandomNumber(0, screenSize.width));
+  // robot.moveMouse(getRandomNumber(0, screenSize.height), getRandomNumber(0, screenSize.width));
+  robot.moveMouse(getRandomNumber(0, 10), getRandomNumber(0, 10));
 
 }
