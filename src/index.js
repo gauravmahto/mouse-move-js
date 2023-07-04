@@ -1,4 +1,5 @@
 import { getRandomValues } from 'node:crypto';
+import { EventEmitter } from 'node:events';
 
 import robot from 'robotjs';
 
@@ -7,6 +8,7 @@ robot.setMouseDelay(2);
 
 const twoPI = Math.PI * 2.0;
 const screenSize = robot.getScreenSize();
+const eventEmitter = new EventEmitter();
 
 console.log('Screen size', screenSize);
 
@@ -67,11 +69,21 @@ async function* timerPromise(timeMs) {
 
 }
 
-for await (const interval of timerPromise(10000)) {
-
-  console.log(`Waited ${interval}`);
+eventEmitter.on('moveMouse', () => {
 
   // robot.moveMouse(getRandomNumber(0, screenSize.height), getRandomNumber(0, screenSize.width));
   robot.moveMouse(getRandomNumber(0, 10), getRandomNumber(0, 10));
 
-}
+});
+
+(async () => {
+
+  for await (const interval of timerPromise(10000)) {
+
+    console.log(`Waited ${interval}`);
+
+    eventEmitter.emit('moveMouse');
+
+  }
+
+})();
