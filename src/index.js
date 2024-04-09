@@ -3,6 +3,8 @@ import { EventEmitter } from 'node:events';
 
 import robot from 'robotjs';
 
+let [lastX, lastY] = [0, 0];
+
 // Speed up the mouse.
 robot.setMouseDelay(2);
 
@@ -71,8 +73,25 @@ async function* timerPromise(timeMs) {
 
 eventEmitter.on('moveMouse', () => {
 
+  const currentLatestPos = robot.getMousePos();
+
+  let [currX, currY] = [currentLatestPos.x, currentLatestPos.y];
+
   // robot.moveMouse(getRandomNumber(0, screenSize.height), getRandomNumber(0, screenSize.width));
-  robot.moveMouse(getRandomNumber(0, 10), getRandomNumber(0, 10));
+  const [x, y] = [getRandomNumber(0, 10), getRandomNumber(0, 10)];
+
+  if (lastX === currX &&
+    lastY === currY) {
+
+    [lastX, lastY] = [x, y];
+
+    robot.moveMouse(x, y);
+
+  } else {
+
+    [lastX, lastY] = [currX, currY];
+
+  }
 
 });
 
