@@ -5,26 +5,26 @@ import robot from 'robotjs';
 
 let [lastX, lastY] = [0, 0];
 
+function getEnv() {
+
+  const delayMs = Number(process.env.DELAY_MS);
+
+  return {
+    DELAY_MS: !Number.isNaN(delayMs) && delayMs > 999 ? delayMs : 10000
+  };
+
+}
+
+const env = getEnv();
+
 // Speed up the mouse.
+// Sets the delay in milliseconds to sleep after a mouse event. This is 10ms by default.
 robot.setMouseDelay(2);
 
-const twoPI = Math.PI * 2.0;
 const screenSize = robot.getScreenSize();
 const eventEmitter = new EventEmitter();
 
 console.log('Screen size', screenSize);
-
-// const height = (screenSize.height / 2) - 10;
-// const width = screenSize.width;
-// let y;
-
-// for (let x = 0; x < width; x++) {
-
-//   y = height * Math.sin((twoPI * x) / width) + height;
-
-//   robot.moveMouse(x, y);
-
-// }
 
 function getRandomNumber(start, end) {
 
@@ -77,15 +77,20 @@ eventEmitter.on('moveMouse', () => {
 
   let [currX, currY] = [currentLatestPos.x, currentLatestPos.y];
 
-  // robot.moveMouse(getRandomNumber(0, screenSize.height), getRandomNumber(0, screenSize.width));
-  const [x, y] = [getRandomNumber(0, 10), getRandomNumber(0, 10)];
+  let randomXRange = [];
+  let randomYRange = [];
+
+  randomXRange = (currX + 5 > screenSize.width) ? [currX - 5, currX] : [currX, currX + 5];
+  randomYRange = (currY + 5 > screenSize.height) ? [currY - 5, currY] : [currY, currY + 5];
+
+  let [x, y] = [getRandomNumber(...randomXRange), getRandomNumber(...randomYRange)];
 
   if (lastX === currX &&
     lastY === currY) {
 
     [lastX, lastY] = [x, y];
 
-    robot.moveMouse(x, y);
+    robot.moveMouseSmooth(x, y);
 
   } else {
 
@@ -97,7 +102,7 @@ eventEmitter.on('moveMouse', () => {
 
 (async () => {
 
-  for await (const interval of timerPromise(10000)) {
+  for await (const interval of timerPromise(env.DELAY_MS)) {
 
     console.log(`Waited ${interval}`);
 

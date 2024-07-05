@@ -4,7 +4,7 @@
   "description": "Mouse move",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --env-file=.env src/index.js"
   },
   "author": "Gaurav",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "module": "nodenext"
   },
   "dependencies": {
-    "robotjs": "0.6.0"
+    "robotjs": "^0.6.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.9"
