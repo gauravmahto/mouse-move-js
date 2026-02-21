@@ -2,16 +2,13 @@
   "name": "core-mouse-move",
   "version": "1.0.0",
   "description": "Mouse move",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node --env-file=.env src/index.js"
   },
   "author": "Gaurav",
   "license": "MIT",
   "type": "module",
-  "compilerOptions": {
-    "module": "nodenext"
-  },
   "dependencies": {
     "robotjs": "0.6.0"
   },

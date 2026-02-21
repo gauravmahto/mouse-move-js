@@ -131,3 +131,4 @@ dist
 
 # MAC specific
 .DS_Store 
+.aider*
