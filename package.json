@@ -13,9 +13,9 @@
     "module": "nodenext"
   },
   "dependencies": {
-    "robotjs": "^0.6.0"
+    "robotjs": "0.6.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.9"
+    "@types/node": "25.3.0"
   }
 }
