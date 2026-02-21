@@ -102,6 +102,8 @@ eventEmitter.on('moveMouse', () => {
 
 (async () => {
 
+  console.log(`Alright, starting with a delay of ${env.DELAY_MS}ms`);
+
   for await (const interval of timerPromise(env.DELAY_MS)) {
 
     console.log(`Waited ${interval}`);
